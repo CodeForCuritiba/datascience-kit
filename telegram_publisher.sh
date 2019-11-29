@@ -2,6 +2,8 @@
 
 BOT_URL="https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage"
 
+VERSION=$(cat VERSION || echo 'N/A')
+
 PARSE_MODE="Markdown"
 
 if [ $TRAVIS_TEST_RESULT -ne 0 ]; then
@@ -17,10 +19,11 @@ send_msg () {
 
 send_msg "
 CODE 4 CURITIBA - 🏭 - Status do travis
-*${build_status}!*
+Status da construção: *${build_status}!*
 
 \`Repositório:  ${TRAVIS_REPO_SLUG}\`
-\`Branch:      ${TRAVIS_BRANCH}\`
+\`Branch:       ${TRAVIS_BRANCH}\`
+\`Versão:       ${VERSION}\`
 
 ${TRAVIS_COMMIT_MESSAGE}
 
