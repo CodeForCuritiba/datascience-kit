@@ -3,7 +3,9 @@ echo "Telegram Publisher"
 
 BOT_URL="https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage"
 
-VERSION=$(cat VERSION || echo 'N/A')
+VERSION=$(cat VERSION 2> /dev/null || echo 'N/A')
+
+echo "Publicando versao: ${VERSION}";
 
 PARSE_MODE="Markdown"
 
@@ -30,3 +32,5 @@ ${TRAVIS_COMMIT_MESSAGE}
 
 [Link da construção](${TRAVIS_JOB_WEB_URL})
 "
+
+echo "Fim"
