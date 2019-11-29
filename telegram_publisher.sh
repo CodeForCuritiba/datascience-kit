@@ -1,4 +1,5 @@
-#!/bin/sh
+#!/bin/bash
+echo "Telegram Publisher"
 
 BOT_URL="https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage"
 
