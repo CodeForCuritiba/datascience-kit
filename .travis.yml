@@ -1,0 +1,32 @@
+---
+language: python
+
+python: 
+  - "3.7"
+
+services:
+  - docker
+
+branches:
+  only:
+    - master
+    - release-.+
+
+jobs:
+  include:
+    - stage: Test build on project; smoketest
+      if: type = pull_request
+      before_script:
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+      script:
+        - docker build -t datascience-kit .
+    - stage: Deploy project to DockerHUB
+      if: type = push && branch = master
+      before_script:
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+        - docker build -t datascience-kit .
+        - docker tag datascience-kit $DOCKER_USERNAME/datascience-kit:$(cat VERSION)
+        - docker tag datascience-kit $DOCKER_USERNAME/datascience-kit:latest
+      script:
+        - docker push $DOCKER_USERNAME/datascience-kit:$(cat VERSION)
+        - docker push $DOCKER_USERNAME/datascience-kit:latest
