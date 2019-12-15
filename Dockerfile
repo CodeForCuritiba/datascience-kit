@@ -1,7 +1,7 @@
 FROM fedora:latest
 
-RUN mkdir /app && dnf install -y python3 python3-pip python3-pandas python3-numpy python3-matplotlib python3-ipython python3-sympy && \
-    pip3 install --upgrade pip jupyter pandarallel qgrid
+RUN mkdir /app && dnf install -y python3 python3-pip python3-pandas python3-numpy python3-matplotlib python3-ipython python3-sympy figlet && \
+    pip3 install --upgrade pip jupyter pandarallel qgrid pipenv_to_requirements
 
 WORKDIR /app
 
